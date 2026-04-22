@@ -8,7 +8,7 @@
  * - `run_experiment` tool — runs any command, times it, captures output, detects pass/fail
  * - `log_experiment` tool — records results with session-persisted state
  * - Status widget showing experiment count + best metric
- * - Ctrl+Alt+R toggle to expand/collapse full dashboard inline above the editor
+ * - Ctrl+Shift+T toggle to expand/collapse full dashboard inline above the editor
  * - Adds autoresearch guidance to the system prompt and points the agent at autoresearch.md
  * - Injects autoresearch.md into context on every turn via before_agent_start
  */
@@ -873,8 +873,8 @@ function renderDashboardLines(
     headerHint
       ? appendRightAlignedAdaptiveHint(headerLine, width, th, [
           headerHint,
-          "ctrl+alt+r collapse • full: ctrl+alt+x",
-          "ctrl+alt+r • ctrl+alt+x",
+          "ctrl+shift+t collapse • full: ctrl+shift+f",
+          "ctrl+shift+t • ctrl+shift+f",
         ])
       : truncateToWidth(headerLine, width, "…", true)
   );
@@ -1331,7 +1331,7 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
               safeWidth,
               theme,
               rows,
-              "ctrl+alt+r collapse • ctrl+alt+x fullscreen"
+              "ctrl+shift+t collapse • ctrl+shift+f fullscreen"
             ),
           ];
         },
@@ -1424,9 +1424,9 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
           const left = [...essential, ...optional].join("");
           return [
             appendRightAlignedAdaptiveHint(left, safeWidth, theme, [
-              "ctrl+alt+r expand • ctrl+alt+x fullscreen",
-              "ctrl+alt+r expand • full: ctrl+alt+x",
-              "ctrl+alt+r • ctrl+alt+x",
+              "ctrl+shift+t expand • ctrl+shift+f fullscreen",
+              "ctrl+shift+t expand • full: ctrl+shift+f",
+              "ctrl+shift+t • ctrl+shift+f",
             ]),
           ];
         },
@@ -2515,10 +2515,10 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
   });
 
   // -----------------------------------------------------------------------
-  // Ctrl+Alt+R — toggle dashboard expand/collapse
+  // Ctrl+Shift+T — toggle dashboard expand/collapse
   // -----------------------------------------------------------------------
 
-  pi.registerShortcut("ctrl+alt+r", {
+  pi.registerShortcut("ctrl+shift+t", {
     description: "Toggle autoresearch dashboard",
     handler: async (ctx) => {
       const runtime = getRuntime(ctx);
@@ -2537,10 +2537,10 @@ export default function autoresearchExtension(pi: ExtensionAPI) {
   });
 
   // -----------------------------------------------------------------------
-  // Ctrl+Alt+X — fullscreen scrollable dashboard overlay
+  // Ctrl+Shift+F — fullscreen scrollable dashboard overlay
   // -----------------------------------------------------------------------
 
-  pi.registerShortcut("ctrl+alt+x", {
+  pi.registerShortcut("ctrl+shift+f", {
     description: "Fullscreen autoresearch dashboard",
     handler: async (ctx) => {
       const runtime = getRuntime(ctx);
